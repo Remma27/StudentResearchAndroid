@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Moviles1Proyecto</string>
+
+    <!-- Login and signup activity -->
+    <string name="title_activity_login">Validating user</string>
+    <string name="title_activity_signup">Registering User</string>
+
+    <string name="prompt_name">Name</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_password_confirm">Confirm Password</string>
+    <string name="prompt_registerhere">Register here</string>
+    <string name="prompt_register">Register</string>
+    <string name="prompt_login">Login</string>
+
+    <string name="default_web_client_id">169179709322-c2odu75pnadk0bgr71i77pkoh4l4rtd6.apps.googleusercontent.com</string>
+    <string name="area_of_interest" />
+</resources>
