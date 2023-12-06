@@ -6,15 +6,32 @@ import com.example.moviles1proyecto.R
 import android.content.Context
 import android.content.Intent
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.moviles1proyecto.ui.researchProjects.MyAdapter
+import com.example.moviles1proyecto.ui.researchProjects.researchProjects
 import com.example.moviles1proyecto.ui.users.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.toObject
 
 const val valorIntentLogin = 1
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var researchProjectsList: ArrayList<researchProjects>
+
+
     var auth = FirebaseAuth.getInstance()
     var email: String? = null
     var contra: String? = null
+
+    var db = FirebaseFirestore.getInstance()
+
+    var researchReference = db.collection("researchProjects")
+    var researchRef = db.document("researchProjects/FfSgeU6FCRssgRAtX594")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,6 +55,27 @@ class MainActivity : AppCompatActivity() {
             }
             obtenerDatos()
         }
+
+        recyclerView = findViewById(R.id.recyclerview)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        researchProjectsList = arrayListOf()
+
+        db.collection("researchProjects").get()
+            .addOnSuccessListener {
+            if (!it.isEmpty){
+                for (data in it.documents){
+                    val researchProjects: researchProjects? = data.toObject(researchProjects::class.java)
+                    if (researchProjects != null) {
+                        researchProjectsList.add(researchProjects)
+                    }
+                }
+                recyclerView.adapter = MyAdapter(researchProjectsList)
+            }
+        }
+            .addOnFailureListener{
+                Toast.makeText(this,it.toString(),Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun obtenerDatos() {
