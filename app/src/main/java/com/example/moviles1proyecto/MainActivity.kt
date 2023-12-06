@@ -1,20 +1,17 @@
 package com.example.moviles1proyecto.ui.users
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.example.moviles1proyecto.R
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.moviles1proyecto.R
 import com.example.moviles1proyecto.ui.researchProjects.MyAdapter
 import com.example.moviles1proyecto.ui.researchProjects.researchProjects
-import com.example.moviles1proyecto.ui.users.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.toObject
 
 const val valorIntentLogin = 1
 
@@ -38,48 +35,44 @@ class MainActivity : AppCompatActivity() {
 
         // intenta obtener el token del usuario del local storage, sino llama a la ventana de registro
         val prefe = getSharedPreferences("appData", Context.MODE_PRIVATE)
-        email = prefe.getString("email","")
-        contra = prefe.getString("contra","")
+        email = prefe.getString("email", "")
+        contra = prefe.getString("contra", "")
 
-        if(email.toString().trim { it <= ' ' }.length == 0){
+        if (email.toString().trim { it <= ' ' }.length == 0) {
             val intent = Intent(this, LoginActivity::class.java)
             startActivityForResult(intent, valorIntentLogin)
-        }else {
+        } else {
             val uid: String = auth.uid.toString()
-            if (uid == "null"){
-                auth.signInWithEmailAndPassword(email.toString(), contra.toString()).addOnCompleteListener {
-                    if (it.isSuccessful) {
-                        Toast.makeText(this,"Autenticación correcta", Toast.LENGTH_SHORT).show()
+            if (uid == "null") {
+                auth.signInWithEmailAndPassword(email.toString(), contra.toString())
+                    .addOnCompleteListener {
+                        if (it.isSuccessful) {
+                            Toast.makeText(this, "Autenticación correcta", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-                }
             }
             obtenerDatos()
         }
+    }
 
+    private fun obtenerDatos() {
         recyclerView = findViewById(R.id.recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         researchProjectsList = arrayListOf()
 
-        db.collection("researchProjects").get()
-            .addOnSuccessListener {
-            if (!it.isEmpty){
-                for (data in it.documents){
-                    val researchProjects: researchProjects? = data.toObject(researchProjects::class.java)
-                    if (researchProjects != null) {
-                        researchProjectsList.add(researchProjects)
-                    }
-                }
+        db.collection("researchProjects")
+            .get()
+            .addOnSuccessListener { documents ->
+                val projects = documents.toObjects(researchProjects::class.java)
+                researchProjectsList.addAll(projects)
                 recyclerView.adapter = MyAdapter(researchProjectsList)
             }
-        }
-            .addOnFailureListener{
-                Toast.makeText(this,it.toString(),Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, exception.toString(), Toast.LENGTH_SHORT).show()
             }
     }
 
-    private fun obtenerDatos() {
-        Toast.makeText(this,"Esperando hacer algo importante", Toast.LENGTH_LONG).show()
-    }
 
 }

@@ -1,0 +1,77 @@
+<!-- activity_research_details.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/detailResearchTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:textColor="@color/blue"
+        android:text="Details"
+        android:layout_marginBottom="16dp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/researchTitleDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/detailResearchTitle"
+        android:layout_marginTop="8dp"
+        android:text="Research Title"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/areaOfInterestDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/researchTitleDetail"
+        android:layout_marginTop="8dp"
+        android:text="Area of Interest"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/schoolGradeDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/areaOfInterestDetail"
+        android:layout_marginTop="8dp"
+        android:text="School Grade"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/topicDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/schoolGradeDetail"
+        android:layout_marginTop="8dp"
+        android:text="Topic Description"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/Conclusions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/topicDescription"
+        android:layout_marginTop="8dp"
+        android:text="Conclusions"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/finalRecommendations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_below="@id/Conclusions"
+        android:layout_marginTop="8dp"
+        android:text="Final Recommendations"
+        android:textColor="@color/black"/>
+</RelativeLayout>

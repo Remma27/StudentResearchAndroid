@@ -1,6 +1,5 @@
 package com.example.moviles1proyecto.ui.researchProjects
 
-
 data class researchProjects(
     val projectID: String? = null,
     val researchTitle: String? = null,
@@ -9,5 +8,7 @@ data class researchProjects(
     val pdfUrl: String? = null,
     val images: List<String>? = null,
     val conclusions: String? = null,
-    val finalRecommendations: String? = null
+    val finalRecommendations: String? = null,
+    val studentID: Int? = null,
+    val schoolGrade: String? = null
 )
