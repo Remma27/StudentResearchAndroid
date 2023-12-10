@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     var db = FirebaseFirestore.getInstance()
 
     var researchReference = db.collection("researchProjects")
+    var studenReference = db.collection("students")
     var researchRef = db.document("researchProjects/FfSgeU6FCRssgRAtX594")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,7 +60,6 @@ class MainActivity : AppCompatActivity() {
     private fun obtenerDatos() {
         recyclerView = findViewById(R.id.recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
-
         researchProjectsList = arrayListOf()
 
         db.collection("researchProjects")

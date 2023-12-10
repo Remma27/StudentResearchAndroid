@@ -9,6 +9,8 @@ data class researchProjects(
     val images: List<String>? = null,
     val conclusions: String? = null,
     val finalRecommendations: String? = null,
-    val studentID: Int? = null,
+    val studentID: String? = null,
     val schoolGrade: String? = null
+
 )
+
