@@ -13,43 +13,47 @@ import com.example.moviles1proyecto.ui.researchProjects.researchProjects
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
-const val valorIntentLogin = 1
+// Constant to identify the login intent result
+const val loginIntentResult = 1
 
 class MainActivity : AppCompatActivity() {
 
+    // UI components
     private lateinit var recyclerView: RecyclerView
     private lateinit var researchProjectsList: ArrayList<researchProjects>
 
-
+    // Firebase Authentication and Firestore instances
     var auth = FirebaseAuth.getInstance()
     var email: String? = null
     var contra: String? = null
-
     var db = FirebaseFirestore.getInstance()
 
+    // Firestore references
     var researchReference = db.collection("researchProjects")
-    var studenReference = db.collection("students")
+    var studentReference = db.collection("students")
     var researchRef = db.document("researchProjects/FfSgeU6FCRssgRAtX594")
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // intenta obtener el token del usuario del local storage, sino llama a la ventana de registro
-        val prefe = getSharedPreferences("appData", Context.MODE_PRIVATE)
-        email = prefe.getString("email", "")
-        contra = prefe.getString("contra", "")
+        // Try to get the user token from local storage
+        // If not found, call the login window
+        val preferences = getSharedPreferences("appData", Context.MODE_PRIVATE)
+        email = preferences.getString("email", "")
+        contra = preferences.getString("contra", "")
 
-        if (email.toString().trim { it <= ' ' }.length == 0) {
+        if (email.toString().trim { it <= ' ' }.isEmpty()) {
             val intent = Intent(this, LoginActivity::class.java)
-            startActivityForResult(intent, valorIntentLogin)
+            startActivityForResult(intent, loginIntentResult)
         } else {
             val uid: String = auth.uid.toString()
             if (uid == "null") {
+                // If the user is not authenticated, sign in using stored credentials
                 auth.signInWithEmailAndPassword(email.toString(), contra.toString())
                     .addOnCompleteListener {
                         if (it.isSuccessful) {
-                            Toast.makeText(this, "Autenticación correcta", Toast.LENGTH_SHORT)
-                                .show()
+                            Toast.makeText(this, "Authentication successful", Toast.LENGTH_SHORT).show()
                         }
                     }
             }
@@ -57,11 +61,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // Function to retrieve data from Firestore and populate the RecyclerView
     private fun obtenerDatos() {
         recyclerView = findViewById(R.id.recyclerview)
         recyclerView.layoutManager = LinearLayoutManager(this)
         researchProjectsList = arrayListOf()
 
+        // Retrieve research projects data from Firestore
         db.collection("researchProjects")
             .get()
             .addOnSuccessListener { documents ->
@@ -73,6 +79,4 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, exception.toString(), Toast.LENGTH_SHORT).show()
             }
     }
-
-
 }

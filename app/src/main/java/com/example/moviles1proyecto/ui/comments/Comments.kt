@@ -6,7 +6,7 @@ data class Comments(
     val commentText: String? = null,
     val projectID: String? = null,
     val rating: Double? = null,
-    val timestamp: Timestamp? = null,  // Change the type to Timestamp
+    val timestamp: Timestamp? = null,
     val uid: String? = null
 )
 

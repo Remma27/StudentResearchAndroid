@@ -22,25 +22,31 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
+// Activity for displaying details of a research project and handling comments
 class ResearchDetailsActivity : AppCompatActivity() {
 
     private lateinit var commentInput: EditText
     private lateinit var ratingBar: RatingBar
     private lateinit var buttonPublish: Button
 
-    //Comentarios
+    // Comments
     private lateinit var recyclerView: RecyclerView
     private lateinit var commentList: ArrayList<Comments>
     private var db = Firebase.firestore
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_research_details)
+
         val buttonBack = findViewById<Button>(R.id.buttonBack)
         buttonPublish = findViewById<Button>(R.id.buttonPublish)
         commentInput = findViewById<EditText>(R.id.commentInput)
         ratingBar = findViewById<RatingBar>(R.id.ratingBar)
 
+        // Initialize Firebase
         var db = FirebaseFirestore.getInstance()
+
+        // Get data passed from the previous activity
         val projectID = intent.getStringExtra("PROJECTID")
         val researchTitle = intent.getStringExtra("RESEARCH_TITLE")
         val areaOfInterest = intent.getStringExtra("AREA_OF_INTEREST")
@@ -50,6 +56,7 @@ class ResearchDetailsActivity : AppCompatActivity() {
         val finalRecomendations = intent.getStringExtra("FINAL_RECOMMENDATIONS")
         val studentID = intent.getStringExtra("STUDENTID")
 
+        // Set details in the UI
         findViewById<TextView>(R.id.researchTitleDetail).text = researchTitle
         findViewById<TextView>(R.id.areaOfInterestDetail).text = areaOfInterest
         findViewById<TextView>(R.id.schoolGradeDetail).text = schoolGrade
@@ -57,6 +64,7 @@ class ResearchDetailsActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.Conclusions).text = conclusions
         findViewById<TextView>(R.id.finalRecommendations).text = finalRecomendations
 
+        // Load student data asynchronously
         if (!studentID.isNullOrBlank()) {
             GlobalScope.launch(Dispatchers.Main) {
                 try {
@@ -69,12 +77,12 @@ class ResearchDetailsActivity : AppCompatActivity() {
             handleStudentIDMissing()
         }
 
+        // Back button
         buttonBack.setOnClickListener {
             finish()
         }
 
-
-        //Hacer un nuevo comentario
+        // Publish a new comment
         buttonPublish.setOnClickListener {
             val firestore = FirebaseFirestore.getInstance()
             val commentText = commentInput.text.toString()
@@ -93,20 +101,20 @@ class ResearchDetailsActivity : AppCompatActivity() {
                             "uid" to currentUser.uid
                         )
 
-                        // Verifica si el usuario ha comentado previamente en esta investigación
+                        // Check if the user has commented on this project before
                         db.collection("comments")
                             .whereEqualTo("uid", currentUser.uid)
                             .whereEqualTo("projectID", projectID)
                             .get()
                             .addOnSuccessListener { querySnapshot ->
                                 if (querySnapshot.isEmpty) {
-                                    // Guarda el comentario solo si el usuario no ha comentado en esta investigación antes
+                                    // Save the comment only if the user has not commented on this project before
                                     db.collection("comments")
                                         .add(commentData)
                                         .addOnSuccessListener {
                                             Toast.makeText(
                                                 this,
-                                                "Comentario publicado con éxito",
+                                                "Comment published successfully",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                             commentInput.text.clear()
@@ -116,14 +124,14 @@ class ResearchDetailsActivity : AppCompatActivity() {
                                         .addOnFailureListener { e ->
                                             Toast.makeText(
                                                 this,
-                                                "Error al publicar el comentario: $e",
+                                                "Error publishing comment: $e",
                                                 Toast.LENGTH_SHORT
                                             ).show()
                                         }
                                 } else {
                                     Toast.makeText(
                                         this,
-                                        "Ya has comentado en esta investigación.",
+                                        "You have already commented on this project.",
                                         Toast.LENGTH_SHORT
                                     ).show()
                                 }
@@ -131,28 +139,27 @@ class ResearchDetailsActivity : AppCompatActivity() {
                             .addOnFailureListener { e ->
                                 Toast.makeText(
                                     this,
-                                    "Error al verificar comentarios anteriores: $e",
+                                    "Error checking previous comments: $e",
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
                     } else {
                         Toast.makeText(
                             this,
-                            "Por favor, inicia sesión para dejar un comentario.",
+                            "Please log in to leave a comment.",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
                 } catch (e: Exception) {
-                    Toast.makeText(this, "Error al publicar el comentario.", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Error publishing comment.", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else {
-                Toast.makeText(this, "Por favor, escribe un comentario.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Please write a comment.", Toast.LENGTH_SHORT).show()
             }
         }
 
-
-
-        //Ver Comentarios
+        // View Comments
         recyclerView = findViewById(R.id.recyclerviewComments)
         recyclerView.layoutManager = LinearLayoutManager(this)
         commentList = arrayListOf()
@@ -175,6 +182,7 @@ class ResearchDetailsActivity : AppCompatActivity() {
             }
     }
 
+    // Function to load student data from Firestore
     private suspend fun loadStudentData(db: FirebaseFirestore, studentID: String) {
         val querySnapshot = db.collection("students")
             .whereEqualTo("studentID", studentID)
@@ -197,18 +205,19 @@ class ResearchDetailsActivity : AppCompatActivity() {
         }
     }
 
-
+    // Function to handle exceptions when loading student data
     private fun handleStudentDataException(exception: Exception) {
         exception.printStackTrace()
         // Handle the exception according to your needs
-        Toast.makeText(this, "Error cargando datos del estudiante.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Error loading student data.", Toast.LENGTH_SHORT).show()
     }
 
+    // Function to handle the case when studentID is missing
     private fun handleStudentIDMissing() {
         // Handle the case where studentID is null or empty
         Toast.makeText(
             this,
-            "ID de estudiante no encontrado en el documento del proyecto.",
+            "Student ID not found in the project document.",
             Toast.LENGTH_SHORT
         ).show()
     }
