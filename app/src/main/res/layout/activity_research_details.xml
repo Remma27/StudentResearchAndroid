@@ -257,15 +257,6 @@
                 tools:layout_editor_absoluteY="184dp"
                 tools:listitem="@layout/comments" />
 
-            <!-- Vista para mostrar los comentarios publicados -->
-            <LinearLayout
-                android:id="@+id/commentsContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_below="@id/ComentsTitleLabel"
-                android:layout_marginBottom="16dp" />
-
 
         </LinearLayout>
 
