@@ -18,10 +18,29 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/rating"
+            android:id="@+id/ratingLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Rating"
+            android:text="Rating:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp" />
+
+        <RatingBar
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:numStars="5"
+            android:rating="0.0"
+            android:stepSize="1.0"
+            style="?android:attr/ratingBarStyleSmall"
+            />
+
+        <TextView
+            android:id="@+id/commentTextLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Comment:"
             android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_marginTop="8dp" />
@@ -33,6 +52,15 @@
             android:text="Comment Text"
             android:textColor="@color/black"
             android:textSize="16sp"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/timestampLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Date:"
+            android:textColor="@color/black"
+            android:textSize="18sp"
             android:layout_marginTop="8dp" />
 
         <TextView
