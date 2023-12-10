@@ -1,77 +1,230 @@
 <!-- activity_research_details.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/researchDetail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/detailResearchTitle"
+    <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textColor="@color/blue"
-        android:text="Details"
-        android:layout_marginBottom="16dp"
-        android:textStyle="bold"/>
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_above="@+id/ratingBar"
+        >
 
-    <TextView
-        android:id="@+id/researchTitleDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_below="@id/detailResearchTitle"
-        android:layout_marginTop="8dp"
-        android:text="Research Title"
-        android:textColor="@color/black"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/areaOfInterestDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_below="@id/researchTitleDetail"
-        android:layout_marginTop="8dp"
-        android:text="Area of Interest"
-        android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/detailResearchTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:textColor="@color/blue"
+                android:text="Details"
+                android:layout_marginBottom="16dp"
+                android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/schoolGradeDetail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_below="@id/areaOfInterestDetail"
-        android:layout_marginTop="8dp"
-        android:text="School Grade"
-        android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/topicDescription"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_below="@id/schoolGradeDetail"
-        android:layout_marginTop="8dp"
-        android:text="Topic Description"
-        android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/researchTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TITULO"
+                android:textSize="18sp"
+                android:layout_below="@id/detailResearchTitle"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                />
 
-    <TextView
-        android:id="@+id/Conclusions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_below="@id/topicDescription"
-        android:layout_marginTop="8dp"
-        android:text="Conclusions"
-        android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/researchTitleDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_below="@id/researchTitleLabel"
+                android:layout_marginTop="8dp"
+                android:text="Research Title"
+                android:textColor="@color/black"/>
 
-    <TextView
-        android:id="@+id/finalRecommendations"
+
+            <TextView
+                android:id="@+id/InterestTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="AREA"
+                android:textSize="18sp"
+                android:layout_below="@id/researchTitleDetail"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                />
+
+
+            <TextView
+                android:id="@+id/areaOfInterestDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_below="@id/InterestTitleLabel"
+                android:layout_marginTop="8dp"
+                android:text="Area of Interest"
+                android:textColor="@color/black"/>
+
+
+            <TextView
+                android:id="@+id/GradeTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="GRADO"
+                android:textSize="18sp"
+                android:layout_below="@id/areaOfInterestDetail"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/schoolGradeDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_below="@id/GradeTitleLabel"
+                android:layout_marginTop="8dp"
+                android:text="School Grade"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/DescriptionTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DESCRIPCION"
+                android:textSize="18sp"
+                android:layout_below="@id/schoolGradeDetail"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                />
+            <TextView
+                android:id="@+id/topicDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_below="@id/DescriptionTitleLabel"
+                android:layout_marginTop="8dp"
+                android:text="Topic Description"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/ConclusionTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CONCLUSIONES"
+                android:textSize="18sp"
+                android:layout_below="@id/topicDescription"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/Conclusions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_below="@id/ConclusionTitleLabel"
+                android:layout_marginTop="8dp"
+                android:text="Conclusions"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/RecommendationsTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="RECOMENDACIONES FINALES"
+                android:textSize="18sp"
+                android:layout_below="@id/Conclusions"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                />
+
+            <TextView
+                android:id="@+id/finalRecommendations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_below="@id/RecommendationsTitleLabel"
+                android:layout_above="@id/commentsContainer"
+                android:layout_marginTop="8dp"
+                android:text="Final Recommendations"
+                android:textColor="@color/black"/>
+            <TextView
+                android:id="@+id/ComentsTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SECCION DE COMENTARIOS"
+                android:textSize="18sp"
+                android:layout_below="@id/finalRecommendations"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/black"
+                />
+            <!-- Vista para mostrar los comentarios publicados -->
+            <LinearLayout
+                android:id="@+id/commentsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_below="@id/ComentsTitleLabel"
+                android:layout_marginBottom="16dp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+    <!-- Agregar una casilla de valoraciones -->
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="1.0"
+        android:layout_above="@id/commentInput"
+
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Agregar una casilla para comentarios -->
+    <EditText
+        android:id="@+id/commentInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:layout_below="@id/Conclusions"
-        android:layout_marginTop="8dp"
-        android:text="Final Recommendations"
-        android:textColor="@color/black"/>
+        android:minHeight="48dp"
+        android:hint="Escribe un comentario..."
+        android:padding="12dp"
+        android:layout_above="@id/buttonPublish"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Botón para publicar comentarios -->
+    <Button
+        android:id="@+id/buttonPublish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Publicar"
+        android:layout_above="@id/buttonBack"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Botón para regresar -->
+    <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="REGRESAR"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
+
+
+
 </RelativeLayout>
