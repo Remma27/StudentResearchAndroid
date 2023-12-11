@@ -14,9 +14,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Date
 
 class SignupActivity : AppCompatActivity() {
+    // Initialize Firebase Authentication
     var auth = FirebaseAuth.getInstance()
     var db = FirebaseFirestore.getInstance()
 
+    // UI components
     private lateinit var txtRNombre: EditText
     private lateinit var txtREmail: EditText
     private lateinit var txtRContra: EditText
@@ -27,70 +29,83 @@ class SignupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
+        // Initialize UI components by finding views by their IDs
         txtRNombre = findViewById(R.id.txtRNombre)
         txtREmail = findViewById(R.id.txtREmail)
         txtRContra = findViewById(R.id.txtRContra)
         txtRreContra = findViewById(R.id.txtRreContra)
         btnRegistrarU = findViewById(R.id.btnRegistrarU)
 
+        // Set click listener for the registration button
         btnRegistrarU.setOnClickListener {
             registrarUsuario()
         }
     }
 
+    // Function to register a new user
     private fun registrarUsuario() {
+        // Get user input from the text fields
         val nombre = txtRNombre.text.toString()
         val email = txtREmail.text.toString()
         val contra = txtRContra.text.toString()
         val reContra = txtRreContra.text.toString()
 
+        // Check if any field is empty
         if (nombre.isEmpty() || email.isEmpty() || contra.isEmpty() || reContra.isEmpty()) {
-            Toast.makeText(this, "Favor de llenar todos los campos", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Please fill in all fields", Toast.LENGTH_SHORT).show()
         } else {
+            // Check if passwords match
             if (contra == reContra) {
+                // Create a new user in Firebase Authentication
                 auth.createUserWithEmailAndPassword(email, contra)
                     .addOnCompleteListener(this) { task ->
                         if (task.isSuccessful) {
+                            // Get current timestamp
                             val dt: Date = Date()
+
+                            // Create user data for Firestore
                             val user = hashMapOf(
                                 "idemp" to task.result?.user?.uid,
                                 "usuario" to nombre,
                                 "email" to email,
                                 "ultAcceso" to dt.toString(),
                             )
-                            db.collection("datosUsuarios")
+
+                            // Add user data to Firestore collection
+                            db.collection("userDetails")
                                 .add(user)
                                 .addOnSuccessListener { documentReference ->
 
-                                    //Register the data into the local storage
-                                    val prefe = this.getSharedPreferences("appData", Context.MODE_PRIVATE)
+                                    // Register the data into the local storage
+                                    val preferences = this.getSharedPreferences("appData", Context.MODE_PRIVATE)
 
-                                    //Create editor object for write app data
-                                    val editor = prefe.edit()
+                                    // Create an editor object to write app data
+                                    val editor = preferences.edit()
 
-                                    //Set editor fields with the new values
+                                    // Set editor fields with the new values
                                     editor.putString("email", email.toString())
                                     editor.putString("contra", contra.toString())
 
-                                    //Write app data
+                                    // Write app data
                                     editor.commit()
 
-                                    Toast.makeText(this,"Usuario registrado correctamente",Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "User registered successfully", Toast.LENGTH_SHORT).show()
 
+                                    // Callback to the calling activity
                                     Intent().let {
                                         setResult(Activity.RESULT_OK)
                                         finish()
                                     }
                                 }
                                 .addOnFailureListener { e ->
-                                    Toast.makeText(this,"Error al registrar usuario",Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(this, "Error registering user", Toast.LENGTH_SHORT).show()
                                 }
                         } else {
-                            Toast.makeText(this,"Error al registrar usuario",Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Error registering user", Toast.LENGTH_SHORT).show()
                         }
                     }
             } else {
-                Toast.makeText(this, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
         }
     }
