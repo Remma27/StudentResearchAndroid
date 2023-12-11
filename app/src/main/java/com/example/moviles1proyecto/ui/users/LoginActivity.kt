@@ -12,6 +12,10 @@ import android.widget.EditText
 import android.widget.TextView
 import com.google.firebase.auth.FirebaseAuth
 import android.widget.Toast
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
 import java.util.Date
 
@@ -28,6 +32,12 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var txtPassword: EditText
     private lateinit var txtRegister: TextView
     var db = FirebaseFirestore.getInstance()
+
+    companion object {
+        private const val RC_SIGN_IN = 9001
+    }
+
+    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,6 +101,22 @@ class LoginActivity : AppCompatActivity() {
                 showAlert("Error", "Email and password cannot be empty")
             }
         }
+
+        mAuth = FirebaseAuth.getInstance()
+
+        val currentUser = mAuth.currentUser
+
+        if (currentUser != null) {
+            // The user is already signed in, navigate to MainActivity
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish() // finish the current activity to prevent the user from coming back to the SignInActivity using the back button
+        }
+
+        val signInButton = findViewById<Button>(R.id.signInButton)
+        signInButton.setOnClickListener {
+            signIn()
+        }
     }
 
     // Function to navigate to the signup activity
@@ -111,6 +137,16 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
         }
+
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)
+                firebaseAuthWithGoogle(account.idToken!!)
+            } catch (e: ApiException) {
+                Toast.makeText(this, "Google sign in failed: ${e.message}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     // Function to show an alert dialog
@@ -123,4 +159,31 @@ class LoginActivity : AppCompatActivity() {
         val alertDialog: AlertDialog = alertDialogBuilder.create()
         alertDialog.show()
     }
+
+    private fun signIn() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
+        val signInIntent = googleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
+    }
+
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    Toast.makeText(this, "Signed in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
+                } else {
+                    Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
 }
+
