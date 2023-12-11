@@ -1,18 +1,13 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme -->
     <style name="AppTheme.Light" parent="Theme.AppCompat.Light">
-        <!-- Deshabilitar el modo oscuro -->
         <item name="android:forceDarkAllowed">false</item>
 
-        <!-- Barra de acción -->
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
-        <!-- Barra de estado -->
         <item name="android:windowTranslucentStatus">false</item>
 
-        <!-- Colores -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -20,16 +15,25 @@
 
 
 
-        <!-- Otros estilos -->
-        <!-- Agrega aquí otros estilos según tus necesidades -->
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
 
 
 
     <!-- Define colores -->
+
+    <style name="Theme.Moviles1Proyecto.Light" parent="AppTheme.Light" />
+
+
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="textColorPrimary">#000000</color>
+    <color name="textColorSecondary">#666666</color>
 
 </resources>
