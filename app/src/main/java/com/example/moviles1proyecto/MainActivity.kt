@@ -97,6 +97,13 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, about::class.java)
             startActivity(intent)
         }
+
+        val btnGallery: Button = findViewById(R.id.btn2)
+
+        btnGallery.setOnClickListener {
+            val intent = Intent(this, ImagesDetailsActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // Function to retrieve data from Firestore and populate the RecyclerView
