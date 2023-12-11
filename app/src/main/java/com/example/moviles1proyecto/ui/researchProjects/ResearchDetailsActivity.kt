@@ -3,12 +3,15 @@ package com.example.moviles1proyecto.ui.researchProjects
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import com.bumptech.glide.Glide
 import com.example.moviles1proyecto.R
 import com.example.moviles1proyecto.ui.comments.Comments
 import com.example.moviles1proyecto.ui.comments.MyAdapter
@@ -55,6 +58,14 @@ class ResearchDetailsActivity : AppCompatActivity() {
         val conclusions = intent.getStringExtra("CONCLUSIONS")
         val finalRecomendations = intent.getStringExtra("FINAL_RECOMMENDATIONS")
         val studentID = intent.getStringExtra("STUDENTID")
+        val imageView = findViewById<ImageView>(R.id.profilePictureURL)
+        //initializes the viewpagerImages
+        val viewPager = findViewById<ViewPager>(R.id.viewPagerImages)
+        //receives the images from MyAdapter
+        val images = intent.getStringArrayListExtra("IMAGES") ?: emptyList()
+        //show the images
+        val adapter = ImageAdapter(images)
+        viewPager.adapter = adapter
 
         // Set details in the UI
         findViewById<TextView>(R.id.researchTitleDetail).text = researchTitle
@@ -64,7 +75,15 @@ class ResearchDetailsActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.Conclusions).text = conclusions
         findViewById<TextView>(R.id.finalRecommendations).text = finalRecomendations
 
+        //Get the pictures and sends them to the profile picture space
+        val profilePictureURL = intent.getStringExtra("PROFILE_PICTURE_URL")
+        Glide.with(this)
+            .load(profilePictureURL)
+            .into(imageView)
+
+
         // Load student data asynchronously
+
         if (!studentID.isNullOrBlank()) {
             GlobalScope.launch(Dispatchers.Main) {
                 try {
@@ -195,6 +214,14 @@ class ResearchDetailsActivity : AppCompatActivity() {
             val fullName = studentData?.get("fullName") as? String
             val aboutMe = studentData?.get("aboutMe") as? String
             val schoolGradeStudent = studentData?.get("schoolGrade") as? String
+            val profilePictureURL = studentData?.get("profilePictureURL") as? String // Agrega esta línea
+            // Aquí cargas la imagen
+            if (profilePictureURL != null) {
+                val imageView = findViewById<ImageView>(R.id.profilePictureURL)
+                Glide.with(this)
+                    .load(profilePictureURL)
+                    .into(imageView)
+            }
 
             findViewById<TextView>(R.id.fullName).text = fullName
             findViewById<TextView>(R.id.aboutMe).text = aboutMe

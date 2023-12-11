@@ -41,7 +41,8 @@ class MyAdapter(private val researchProjectsList: ArrayList<researchProjects>) :
                 intent.putExtra("TOPIC_DESCRIPTION", researchProject.topicDescription)
                 intent.putExtra("CONCLUSIONS", researchProject.conclusions)
                 intent.putExtra("FINAL_RECOMMENDATIONS", researchProject.finalRecommendations)
-
+                //gets the list of investigations images and and sends it to the researchDetailsActivity
+                intent.putStringArrayListExtra("IMAGES", ArrayList(researchProject.images))
                 context.startActivity(intent)
             }
 

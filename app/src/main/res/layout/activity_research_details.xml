@@ -26,10 +26,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                android:text="Research Details"
+                android:text="RESEARCH DETAILS"
                 android:textColor="@color/blue"
                 android:textSize="24sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:fontFamily="serif"
+                android:shadowColor="#4D000000"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="1"
+
+            />
 
 
             <TextView
@@ -39,6 +46,7 @@
                 android:layout_below="@id/detailResearchTitle"
                 android:layout_marginTop="8dp"
                 android:text="Research Title: "
+                android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -60,6 +68,7 @@
                 android:layout_below="@id/researchTitleDetail"
                 android:layout_marginTop="8dp"
                 android:text="Area of Interest: "
+                android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -82,6 +91,7 @@
                 android:layout_below="@id/areaOfInterestDetail"
                 android:layout_marginTop="8dp"
                 android:text="School Grade: "
+                android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
             <TextView
@@ -101,6 +111,7 @@
                 android:layout_below="@id/schoolGradeDetail"
                 android:layout_marginTop="8dp"
                 android:text="Topic Description: "
+                android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
             <TextView
@@ -120,6 +131,7 @@
                 android:layout_below="@id/topicDescription"
                 android:layout_marginTop="8dp"
                 android:text="Conclusions: "
+                android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -140,6 +152,7 @@
                 android:layout_below="@id/Conclusions"
                 android:layout_marginTop="8dp"
                 android:text="Final Recommendations: "
+                android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -155,25 +168,84 @@
                 android:textColor="@color/black"/>
 
             <TextView
+                android:id="@+id/CarrouselTitleLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/finalRecommendations"
+                android:layout_marginTop="8dp"
+                android:text="Images"
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Carrousel"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="8dp"
+                android:layout_below="@id/CarrouselTitleLabel"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+            <!-- ViewPager para el carrusel de imágenes -->
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerImages"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+
+            <!-- Aquí puedes añadir los indicadores de página -->
+
+        </androidx.cardview.widget.CardView>
+
+            <TextView
                 android:id="@+id/authordetailstitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 android:text="Author Details"
-                android:layout_below="@id/finalRecommendations"
+                android:fontFamily="serif"
+                android:layout_below="@id/Carrousel"
                 android:layout_above="@id/FullNameLabel"
+                android:elevation="4dp"
                 android:textColor="@color/blue"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:paddingTop="20dp"/>
 
             <TextView
-                android:id="@+id/FullNameLabel"
+                android:id="@+id/profilePictureLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/authordetailstitle"
                 android:layout_marginTop="8dp"
+                android:text="Profile Picture "
+                android:fontFamily="sans-serif-black"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+
+            <ImageView
+                android:id="@+id/profilePictureURL"
+                android:layout_width="100dp"
+                android:layout_height="80dp"
+                android:layout_below="@id/profilePictureLabel"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+
+                />
+
+
+
+            <TextView
+                android:id="@+id/FullNameLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profilePictureURL"
+                android:layout_marginTop="8dp"
                 android:text="Name: "
+                android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -196,6 +268,7 @@
                 android:layout_above="@id/aboutMe"
                 android:layout_marginTop="8dp"
                 android:text="About Me: "
+                android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -218,6 +291,7 @@
                 android:layout_above="@id/schoolGradeStudent"
                 android:layout_marginTop="8dp"
                 android:text="School Grade: "
+                android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
 
@@ -232,13 +306,17 @@
                 android:text="schoolGrade"
                 android:textColor="@color/black"/>
 
+
+
+
             <TextView
                 android:id="@+id/ComentsTitleLabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/finalRecommendations"
+                android:layout_below="@id/schoolGradeStudent"
                 android:layout_marginTop="8dp"
                 android:text="Comments: "
+                android:fontFamily="serif"
                 android:textColor="@color/blue"
                 android:textSize="24sp"
                 android:textStyle="bold"
@@ -271,9 +349,11 @@
         android:numStars="5"
         android:stepSize="1.0"
         android:layout_above="@id/commentInput"
-
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp"
+        android:scaleX="0.8"
+        android:scaleY="0.8"
+        />
 
     <!-- Agregar una casilla para comentarios -->
     <EditText
@@ -289,12 +369,20 @@
     <!-- Botón para publicar comentarios -->
     <Button
         android:id="@+id/buttonPublish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Publicar"
+        android:layout_width="80dp"
+        android:layout_height="30dp"
         android:layout_above="@id/buttonBack"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/colorPrimaryDark"
+        android:backgroundTint="#3C53E3"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="8dp"
+        android:text="Publicar"
+        android:textColor="@color/design_default_color_background"
+
+        android:textSize="10sp" />
 
     <!-- Botón para regresar -->
     <Button
@@ -304,7 +392,10 @@
         android:text="REGRESAR"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        />
+
 
 
 

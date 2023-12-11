@@ -11,6 +11,9 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!-- Ajusta el tamaño de las estrellas aquí. Puedes aumentar o disminuir este valor según tus necesidades -->
+
+
 
         <item name="android:windowBackground">@color/windowBackground</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
@@ -19,7 +22,12 @@
     </style>
 
 
+
+
+    <!-- Define colores -->
+
     <style name="Theme.Moviles1Proyecto.Light" parent="AppTheme.Light" />
+
 
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
