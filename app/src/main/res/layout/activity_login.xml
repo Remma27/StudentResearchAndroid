@@ -20,7 +20,8 @@
         android:fontFamily="sans-serif-black"
         android:text="Login"
         android:textAlignment="center"
-        android:textSize="24sp" />
+        android:textSize="24sp"
+        android:textColor="@color/blue"/>
 
     <EditText
         android:id="@+id/txtEmail"

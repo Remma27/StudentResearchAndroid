@@ -10,10 +10,5 @@ class about : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_about)
 
-        val btnReturn: Button = findViewById(R.id.btnReturn)
-
-        btnReturn.setOnClickListener {
-            finish()
-        }
     }
 }

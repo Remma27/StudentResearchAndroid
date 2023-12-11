@@ -1,6 +1,10 @@
 package com.example.moviles1proyecto.ui.researchProjects
 
+import android.app.DownloadManager
+import android.content.Context
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -31,6 +35,8 @@ class ResearchDetailsActivity : AppCompatActivity() {
     private lateinit var commentInput: EditText
     private lateinit var ratingBar: RatingBar
     private lateinit var buttonPublish: Button
+    private lateinit var btnDownload: Button
+
 
     // Comments
     private lateinit var recyclerView: RecyclerView
@@ -41,8 +47,8 @@ class ResearchDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_research_details)
 
-        val buttonBack = findViewById<Button>(R.id.buttonBack)
         buttonPublish = findViewById<Button>(R.id.buttonPublish)
+        btnDownload = findViewById<Button>(R.id.btnDownload)
         commentInput = findViewById<EditText>(R.id.commentInput)
         ratingBar = findViewById<RatingBar>(R.id.ratingBar)
 
@@ -58,6 +64,7 @@ class ResearchDetailsActivity : AppCompatActivity() {
         val conclusions = intent.getStringExtra("CONCLUSIONS")
         val finalRecomendations = intent.getStringExtra("FINAL_RECOMMENDATIONS")
         val studentID = intent.getStringExtra("STUDENTID")
+        val pdfURL = intent.getStringExtra("PDFURL")
         val imageView = findViewById<ImageView>(R.id.profilePictureURL)
         //initializes the viewpagerImages
         val viewPager = findViewById<ViewPager>(R.id.viewPagerImages)
@@ -96,11 +103,28 @@ class ResearchDetailsActivity : AppCompatActivity() {
             handleStudentIDMissing()
         }
 
-        // Back button
-        buttonBack.setOnClickListener {
-            finish()
+
+        if (projectID != null) {
+            postComment(projectID)
         }
 
+        if (projectID != null) {
+            viewComments(projectID)
+        }
+
+        btnDownload.setOnClickListener {
+            if (pdfURL != null) {
+                downloadFile(pdfURL)
+            }
+        }
+
+
+
+    }
+
+
+
+    private fun postComment(projectID: String){
         // Publish a new comment
         buttonPublish.setOnClickListener {
             val firestore = FirebaseFirestore.getInstance()
@@ -177,8 +201,10 @@ class ResearchDetailsActivity : AppCompatActivity() {
                 Toast.makeText(this, "Please write a comment.", Toast.LENGTH_SHORT).show()
             }
         }
+    }
 
-        // View Comments
+    // View Comments
+    private fun viewComments(projectID:String){
         recyclerView = findViewById(R.id.recyclerviewComments)
         recyclerView.layoutManager = LinearLayoutManager(this)
         commentList = arrayListOf()
@@ -247,5 +273,21 @@ class ResearchDetailsActivity : AppCompatActivity() {
             "Student ID not found in the project document.",
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    private fun downloadFile(url: String) {
+        // Crea una solicitud de descarga con la URL proporcionada
+        val request = DownloadManager.Request(Uri.parse(url))
+
+        // Configura el destino de la descarga, en este caso, el directorio de descargas del dispositivo
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "nombre_del_archivo.pdf")
+
+        // Configura otros parámetros de la solicitud (opcional)
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+        request.setTitle("Descargando PDF")
+
+        // Obtiene el servicio DownloadManager y ejecuta la solicitud
+        val downloadManager = getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+        downloadManager.enqueue(request)
     }
 }
