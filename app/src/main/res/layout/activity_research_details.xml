@@ -12,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        android:layout_above="@+id/ratingBar"
-        >
+        android:layout_above="@+id/ratingBar">
 
 
         <LinearLayout
@@ -36,7 +35,7 @@
                 android:shadowDy="2"
                 android:shadowRadius="1"
 
-            />
+                />
 
 
             <TextView
@@ -58,7 +57,7 @@
                 android:layout_below="@id/researchTitleLabel"
                 android:layout_marginTop="8dp"
                 android:text="Research Title"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
 
             <TextView
@@ -81,7 +80,7 @@
                 android:layout_below="@id/InterestTitleLabel"
                 android:layout_marginTop="8dp"
                 android:text="Area of Interest"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
 
             <TextView
@@ -94,6 +93,7 @@
                 android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/schoolGradeDetail"
                 android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                 android:layout_below="@id/GradeTitleLabel"
                 android:layout_marginTop="8dp"
                 android:text="School Grade"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/DescriptionTitleLabel"
@@ -114,6 +114,7 @@
                 android:fontFamily="sans-serif-black"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/topicDescription"
                 android:layout_width="match_parent"
@@ -122,7 +123,7 @@
                 android:layout_below="@id/DescriptionTitleLabel"
                 android:layout_marginTop="8dp"
                 android:text="Topic Description"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/ConclusionTitleLabel"
@@ -143,7 +144,7 @@
                 android:layout_below="@id/ConclusionTitleLabel"
                 android:layout_marginTop="8dp"
                 android:text="Conclusions"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/RecommendationsTitleLabel"
@@ -165,7 +166,7 @@
                 android:layout_above="@id/authordetailstitle"
                 android:layout_marginTop="8dp"
                 android:text="Final Recommendations"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/CarrouselTitleLabel"
@@ -187,17 +188,16 @@
                 app:cardCornerRadius="16dp"
                 app:cardElevation="4dp">
 
-            <!-- ViewPager para el carrusel de imágenes -->
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPagerImages"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                <!-- ViewPager para el carrusel de imágenes -->
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPagerImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
 
 
+                <!-- Aquí puedes añadir los indicadores de página -->
 
-            <!-- Aquí puedes añadir los indicadores de página -->
-
-        </androidx.cardview.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <TextView
                 android:id="@+id/authordetailstitle"
@@ -212,7 +212,7 @@
                 android:textColor="@color/blue"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:paddingTop="20dp"/>
+                android:paddingTop="20dp" />
 
             <TextView
                 android:id="@+id/profilePictureLabel"
@@ -237,7 +237,6 @@
                 />
 
 
-
             <TextView
                 android:id="@+id/FullNameLabel"
                 android:layout_width="match_parent"
@@ -258,7 +257,7 @@
                 android:layout_above="@id/AboutMeLabel"
                 android:layout_marginTop="8dp"
                 android:text="Full Name"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/AboutMeLabel"
@@ -281,7 +280,7 @@
                 android:layout_above="@id/schoolGradeLabel"
                 android:layout_marginTop="8dp"
                 android:text="About Me"
-                android:textColor="@color/black"/>
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/schoolGradeLabel"
@@ -304,9 +303,7 @@
                 android:layout_above="@id/ComentsTitleLabel"
                 android:layout_marginTop="8dp"
                 android:text="schoolGrade"
-                android:textColor="@color/black"/>
-
-
+                android:textColor="@color/black" />
 
 
             <TextView
@@ -320,7 +317,7 @@
                 android:textColor="@color/blue"
                 android:textSize="24sp"
                 android:textStyle="bold"
-                android:paddingTop="20dp"/>
+                android:paddingTop="20dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerviewComments"
@@ -350,10 +347,10 @@
         android:stepSize="1.0"
         android:layout_above="@id/commentInput"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:scaleX="0.8"
-        android:scaleY="0.8"
-        />
+        android:layout_marginBottom="8dp"
+        android:scaleX="0.6"
+        android:scaleY="0.6" />
+
 
     <!-- Agregar una casilla para comentarios -->
     <EditText
@@ -361,7 +358,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="48dp"
-        android:hint="Escribe un comentario..."
+        android:hint="Write a comment..."
         android:padding="12dp"
         android:layout_above="@id/buttonPublish"
         android:layout_marginBottom="16dp" />
@@ -379,9 +376,8 @@
         android:backgroundTint="#3C53E3"
         android:paddingHorizontal="16dp"
         android:paddingVertical="8dp"
-        android:text="Publicar"
+        android:text="Post"
         android:textColor="@color/design_default_color_background"
-
         android:textSize="10sp" />
 
     <!-- Botón para regresar -->
@@ -389,14 +385,12 @@
         android:id="@+id/buttonBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="REGRESAR"
+        android:text="Return"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:layout_marginTop="20dp"
-        />
-
-
+        android:layout_marginTop="20dp" />
 
 
 </RelativeLayout>
+

@@ -4,11 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviles1proyecto.R
+import com.example.moviles1proyecto.about
 import com.example.moviles1proyecto.ui.images.ImagesDetailsActivity
 import com.example.moviles1proyecto.ui.researchProjects.MyAdapter
 import com.example.moviles1proyecto.ui.researchProjects.researchProjects
@@ -89,6 +91,12 @@ class MainActivity : AppCompatActivity() {
             // Handle the case where the user is not signed in
         }
 
+        val btnAboutUs: Button = findViewById(R.id.btn1)
+
+        btnAboutUs.setOnClickListener {
+            val intent = Intent(this, about::class.java)
+            startActivity(intent)
+        }
     }
 
     // Function to retrieve data from Firestore and populate the RecyclerView

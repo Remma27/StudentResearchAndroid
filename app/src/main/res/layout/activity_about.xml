@@ -8,10 +8,10 @@
     tools:context=".about">
 
     <Button
-        android:id="@+id/btnBack"
+        android:id="@+id/btnReturn"
         android:layout_width="120dp"
         android:layout_height="50dp"
-        android:text="Back" />
+        android:text="Return" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -55,6 +55,7 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
+
     <!-- Person 2 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -88,6 +89,7 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
+
     <!-- Person 3 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -121,6 +123,7 @@
                 android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
+
     <!-- Person 4 -->
     <LinearLayout
         android:layout_width="match_parent"
