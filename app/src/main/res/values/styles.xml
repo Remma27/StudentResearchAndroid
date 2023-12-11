@@ -16,10 +16,16 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <!-- Ajusta el tamaño de las estrellas aquí. Puedes aumentar o disminuir este valor según tus necesidades -->
+
+
 
         <!-- Otros estilos -->
         <!-- Agrega aquí otros estilos según tus necesidades -->
     </style>
+
+
+
 
     <!-- Define colores -->
     <color name="colorPrimary">#3F51B5</color>
